@@ -5,9 +5,10 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     public List<MangoSpawnPoint> spawners;
-
+    public static Queue<Rigidbody2D> mangos;
     private void Start()
     {
+        mangos = new Queue<Rigidbody2D>();
         foreach(Transform t in transform)
         {
             spawners.Add(t.GetComponent<MangoSpawnPoint>());
