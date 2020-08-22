@@ -1,0 +1,15 @@
+Mangomancer
+
+You have to defend a tree from attackers who try to eat it by pulling mangos off and shooting them at enemies
+
+
+
+Tree class - Just has HP
+Mango Spawn Point - spawns mangos that grow over time 
+Player - movement left and right, grabbing and shooting mangos
+Mangos - Growing, damage on his
+Enemies - movement, damaging the tree
+
+Start menu
+End menu
+Score screen
