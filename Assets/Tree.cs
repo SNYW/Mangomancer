@@ -14,17 +14,6 @@ public class Tree : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && HasFreeSpawner())
-        {
-            SpawnMango();
-        }else if (Input.GetKeyDown(KeyCode.E) && !HasFreeSpawner())
-        {
-            Debug.Log("NO FREE SPAWNERS");
-        }
-    }
-
     public void SpawnMango()
     {
         var index = Random.Range(0, spawners.Count);
@@ -39,7 +28,7 @@ public class Tree : MonoBehaviour
         }
     }
 
-    private bool HasFreeSpawner()
+    public bool HasFreeSpawner()
     {
         var freeSpawner = false;
         foreach(MangoSpawnPoint m in spawners)

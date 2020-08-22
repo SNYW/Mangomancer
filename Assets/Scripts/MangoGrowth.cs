@@ -13,6 +13,7 @@ public class MangoGrowth : MonoBehaviour
     public bool grown;
 
     private Rigidbody2D rb2D;
+    public ParticleSystem trail;
 
     void Start()
     {
@@ -23,6 +24,8 @@ public class MangoGrowth : MonoBehaviour
         rb2D.simulated = false;
         var startScale = new Vector3(0, 0, 1);
         transform.localScale = startScale;
+        trail.startSize = currentGrownSize*10;
+        trail.gameObject.SetActive(false);
     }
 
     void Update()
