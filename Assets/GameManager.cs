@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public Tree tree;
     public Animator Mangomage;
+
+    public float shootForce;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && tree.HasFreeSpawner())
@@ -13,9 +13,16 @@ public class GameManager : MonoBehaviour
             Mangomage.SetTrigger("MakeMango");
             tree.SpawnMango();
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            ShootMango();
+            if(Tree.mangos.Count > 0)
+            {
+                ShootMango();
+            }
+        }
+        if (Input.GetMouseButton(0))
+        {
+            Debug.Log("HELD");
         }
         else if (Input.GetKeyDown(KeyCode.E) && !tree.HasFreeSpawner())
         {
@@ -28,7 +35,8 @@ public class GameManager : MonoBehaviour
         Mangomage.SetTrigger("ShootMango");
         var targetDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mangoToFire = Tree.mangos.Dequeue();
-        mangoToFire.AddForce(targetDirection - transform.position, ForceMode2D.Impulse);
+        mangoToFire.GetComponent<MangoDamage>().Activate();
+        mangoToFire.AddForce((targetDirection += transform.position)*shootForce, ForceMode2D.Impulse);
     }
 
 }

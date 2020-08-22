@@ -30,7 +30,6 @@ public class MangoSpawnPoint : MonoBehaviour
     {
        available = false;
        mangoGrowth = Instantiate(mango, transform.position, Quaternion.identity).GetComponent<MangoGrowth>();
-       Tree.mangos.Enqueue(mangoGrowth.GetComponent<Rigidbody2D>());
     }
 
 }

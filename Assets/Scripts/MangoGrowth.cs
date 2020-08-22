@@ -48,6 +48,7 @@ public class MangoGrowth : MonoBehaviour
         else
         {
             var grownScale = new Vector2(currentGrownSize, currentGrownSize);
+            Tree.mangos.Enqueue(GetComponent<Rigidbody2D>());
             transform.localScale = (Vector3)grownScale;
             rb2D.simulated = true;
             grown = true;

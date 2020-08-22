@@ -1373,6 +1373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 499081315}
   Mangomage: {fileID: 2088621393}
+  shootForce: 4
 --- !u!4 &1290706557
 Transform:
   m_ObjectHideFlags: 0
@@ -2157,7 +2158,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088621389}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
