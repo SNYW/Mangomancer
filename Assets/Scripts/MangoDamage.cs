@@ -19,7 +19,7 @@ public class MangoDamage : MonoBehaviour
     {
         active = true;
         particleSystem.gameObject.SetActive(true);
-        GetComponent<LineRenderer>().enabled = false;
+        Destroy(this.gameObject, 5);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
