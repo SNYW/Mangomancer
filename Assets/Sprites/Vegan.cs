@@ -25,6 +25,7 @@ public class Vegan : MonoBehaviour
     public void Die(float force)
     {
         rb.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+        rb.AddTorque(force, ForceMode2D.Impulse);
         Destroy(this.gameObject, 2);
     }
 

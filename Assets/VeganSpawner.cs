@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VeganSpawner : MonoBehaviour
 {
     public float spawnCooldown;
     public GameObject[] vegans;
+
+    public bool vertical;
 
     private float currentCD;
 
@@ -27,13 +27,24 @@ public class VeganSpawner : MonoBehaviour
         if(currentCD <= 0)
         {
             currentCD = spawnCooldown;
-            SpawnVegan();
+            if (vertical)
+            {
+                SpawnVeganVert();
+            }
+            else{
+                SpawnVeganHorizontal();
+            }
         }
     }
 
-    void SpawnVegan()
+    void SpawnVeganVert()
     {
         var vegan = vegans[Random.Range(0, vegans.Length)];
-        Instantiate(vegan, new Vector3(transform.position.x, Random.Range(-2f, 9f), 0), Quaternion.identity);
+        Instantiate(vegan, new Vector3(transform.position.x, Random.Range(-3f, 18.8f), 0), Quaternion.identity);
+    }
+    void SpawnVeganHorizontal()
+    {
+        var vegan = vegans[Random.Range(0, vegans.Length)];
+        Instantiate(vegan, new Vector3(Random.Range(2f, 40f), transform.position.y, 0), Quaternion.identity);
     }
 }
