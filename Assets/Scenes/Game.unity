@@ -1373,7 +1373,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 499081315}
   Mangomage: {fileID: 2088621393}
-  shootForce: 7
+  shootForce: 100
+  mangoToFire: {fileID: 0}
 --- !u!4 &1290706557
 Transform:
   m_ObjectHideFlags: 0

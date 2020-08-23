@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetMouseButton(0) && mangoToFire == null)
         {   mangoToFire = Tree.mangos.Dequeue();
-            ShowMangoArc(mangoToFire.GetComponent<ArcRenderer>());
         }
         else if (Input.GetKeyDown(KeyCode.E) && !tree.HasFreeSpawner())
         {
@@ -36,15 +35,12 @@ public class GameManager : MonoBehaviour
     {
         Mangomage.SetTrigger("ShootMango");
         Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        var targetDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mouseDir = mousePos - mangoToFire.transform.position;
+        mouseDir.z = 0;
+        mouseDir = mouseDir.normalized;
         mangoToFire.GetComponent<MangoDamage>().Activate();
-        mangoToFire.AddForce(transform.position + targetDirection, ForceMode2D.Impulse);
+        mangoToFire.AddForce(mouseDir * shootForce, ForceMode2D.Impulse);
         mangoToFire = null;
     }
-
-    private void ShowMangoArc(ArcRenderer arc)
-    {
-        arc.ShowArc(shootForce);
-    }
-
 }

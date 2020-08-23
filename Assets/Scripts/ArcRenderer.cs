@@ -25,7 +25,7 @@ public class ArcRenderer : MonoBehaviour
 
     public void ShowArc(float Velocity)
     {
-        this.velocity = Velocity*2;
+        this.velocity = Velocity;
         
         lr.enabled = true;
     }
@@ -60,7 +60,7 @@ public class ArcRenderer : MonoBehaviour
     {
         float x = t * maxDistance;
         float y = x * Mathf.Tan(radianAngle) - ((gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
-        var test = new Vector3(transform.position.x-x, transform.position.y+y);
+        var test = new Vector3(transform.position.x+x, transform.position.y+y);
         return test;
     }
 
