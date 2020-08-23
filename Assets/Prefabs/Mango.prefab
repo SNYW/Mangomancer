@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3284686897139552242}
   - component: {fileID: 819462297480449397}
   - component: {fileID: 3268235129413209422}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: 851835118774437705}
   - component: {fileID: -2370988816276701851}
   - component: {fileID: 2078098624605723164}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mango
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4911,5 +4911,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageFactor: 10
-  damage: 0
   active: 1

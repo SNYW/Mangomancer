@@ -3,14 +3,13 @@
 public class MangoDamage : MonoBehaviour
 {
     public float damageFactor;
-    public int damage;
     public bool active;
     private ParticleSystem particleSystem;
+    private MangoGrowth mangoGrowth;
 
     private void Start()
     {
-        var mangoGrowth = GetComponent<MangoGrowth>();
-        damage = (int)((mangoGrowth.currentGrownSize* 100) * damageFactor);
+        mangoGrowth = GetComponent<MangoGrowth>();
         particleSystem = mangoGrowth.trail;
     }
 
@@ -25,10 +24,17 @@ public class MangoDamage : MonoBehaviour
     {
         if (active)
         {
-            if(collision.gameObject.tag == "enemy")
+            if (collision.gameObject.tag == "Enemy")
             {
-                //Deal Damage
+                var vegan = collision.gameObject.GetComponentInParent<Vegan>();
+                vegan.Die(mangoGrowth.currentGrownSize * 100);
+                Die();
             }
         }
+    }
+
+    private void Die()
+    {
+        Destroy(this.gameObject);
     }
 }

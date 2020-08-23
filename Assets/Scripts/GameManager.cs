@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("down and not null: "+(Input.GetMouseButtonDown(0) && mangoToFire != null));
-        Debug.Log("down and null: " + (Input.GetMouseButtonDown(0) && mangoToFire == null));
         if (Input.GetKeyDown(KeyCode.Alpha1) && tree.HasFreeSpawner(1))
         {
             Mangomage.SetTrigger("MakeMango");
@@ -51,7 +49,6 @@ public class GameManager : MonoBehaviour
     private void ShootMango()
     {
         Mangomage.SetTrigger("ShootMango");
-        Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mouseDir = mousePos - mangoToFire.transform.position;
         mouseDir.z = 0;
