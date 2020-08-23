@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MangoSpirit : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float speed;
+
+    public MangoSpawnPoint target;
+    private Rigidbody2D rb;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(Random.Range(3, 10), Random.Range(3, 10)), ForceMode2D.Impulse);
+        rb.AddTorque(Random.Range(50, 100));
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        if(Vector2.Distance(target.transform.position, transform.position) < 0.1)
+        {
+            target.SpawnMango();
+            Destroy(this.gameObject);
+        }
     }
 }

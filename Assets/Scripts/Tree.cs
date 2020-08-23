@@ -1,11 +1,13 @@
 ﻿
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
     public List<MangoSpawnPoint> spawners;
     public static Queue<Rigidbody2D> mangos;
+    public static int availSpawners;
     private void Start()
     {
         mangos = new Queue<Rigidbody2D>();
@@ -13,6 +15,10 @@ public class Tree : MonoBehaviour
         {
             spawners.Add(t.GetComponent<MangoSpawnPoint>());
         }
+    }
+    private void Update()
+    {
+        UpdateFreeSpawners();
     }
 
     public void SpawnMango()
@@ -29,17 +35,31 @@ public class Tree : MonoBehaviour
         }
     }
 
-    public bool HasFreeSpawner()
+    public bool HasFreeSpawner(int numberNeeded)
     {
-        var freeSpawner = false;
-        foreach(MangoSpawnPoint m in spawners)
+        return numberNeeded <= availSpawners; 
+    }
+
+    public MangoSpawnPoint GetMangoSpawnPoint()
+    {
+        var spawner = spawners[Random.Range(0, spawners.Count)];
+        while (!spawner.available)
+        {
+            spawner = spawners[Random.Range(0, spawners.Count)];
+        }
+        return spawner;
+    }
+
+    void UpdateFreeSpawners()
+    {
+        availSpawners = 0;
+        foreach (MangoSpawnPoint m in spawners)
         {
             if (m.available)
             {
-                return true;
+                availSpawners++;
             }
         }
-        return freeSpawner; 
     }
 
 }
