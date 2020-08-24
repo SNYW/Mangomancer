@@ -17,8 +17,8 @@ public class Vegan : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, mangomancer.transform.position, speed * Time.deltaTime);
         if (Vector2.Distance(mangomancer.transform.position, transform.position) < 0.1)
-        { 
-            // Game Over
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
         }
     }
 

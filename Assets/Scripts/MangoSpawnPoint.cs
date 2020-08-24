@@ -28,8 +28,9 @@ public class MangoSpawnPoint : MonoBehaviour
 
     public void SpawnMango()
     {
-       available = false;
-       mangoGrowth = Instantiate(mango, transform.position, Quaternion.identity).GetComponent<MangoGrowth>();
+        available = false;
+        mangoGrowth = Instantiate(mango, transform.position, Quaternion.identity).GetComponent<MangoGrowth>();
+        mangoGrowth.transform.parent = GameObject.Find("Mangos").transform;
     }
 
 }

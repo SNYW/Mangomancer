@@ -4,6 +4,7 @@ public class VeganSpawner : MonoBehaviour
 {
     public float spawnCooldown;
     public GameObject[] vegans;
+    public Transform veganHolder;
 
     public bool vertical;
 
@@ -40,11 +41,13 @@ public class VeganSpawner : MonoBehaviour
     void SpawnVeganVert()
     {
         var vegan = vegans[Random.Range(0, vegans.Length)];
-        Instantiate(vegan, new Vector3(transform.position.x, Random.Range(-3f, 18.8f), 0), Quaternion.identity);
+        var instVegan = Instantiate(vegan, new Vector3(transform.position.x, Random.Range(-3f, 18.8f), 0), Quaternion.identity);
+        instVegan.transform.parent = veganHolder;
     }
     void SpawnVeganHorizontal()
     {
         var vegan = vegans[Random.Range(0, vegans.Length)];
-        Instantiate(vegan, new Vector3(Random.Range(2f, 40f), transform.position.y, 0), Quaternion.identity);
+        var instVegan = Instantiate(vegan, new Vector3(Random.Range(2f, 40f), transform.position.y, 0), Quaternion.identity);
+        instVegan.transform.parent = veganHolder;
     }
 }

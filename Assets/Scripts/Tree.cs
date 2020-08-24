@@ -8,6 +8,7 @@ public class Tree : MonoBehaviour
     public List<MangoSpawnPoint> spawners;
     public static Queue<Rigidbody2D> mangos;
     public static int availSpawners;
+
     private void Start()
     {
         mangos = new Queue<Rigidbody2D>();
