@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class GameManager : MonoBehaviour
     public Transform mangoHolder;
     public Transform veganHolder;
     public GameObject gameOverPanel;
+    public int comboCounter;
+    public Text comboCounterText;
+    public float mageSpawnCD;
+    private float currentMageSpawnCD;
 
     public Rigidbody2D mangoToFire;
     private bool playing;
@@ -16,37 +21,37 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         playing = true;
+        comboCounter = 1;
+        currentMageSpawnCD = 0;
     }
 
     private void Update()
     {
+        currentMageSpawnCD -= Time.deltaTime;
+        if(currentMageSpawnCD <= 0)
+        {
+            shootMage.StaffSystemOn();
+            if (Input.GetKeyDown(KeyCode.E) && tree.HasFreeSpawner(comboCounter))
+            {
+                Mangomage.SetTrigger("MakeMango");
+                shootMage.SpawnSpirit(comboCounter);
+                currentMageSpawnCD = mageSpawnCD;
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && !tree.HasFreeSpawner(comboCounter))
+            {
+                shootMage.SpawnSpirit(Tree.availSpawners);
+                currentMageSpawnCD = mageSpawnCD;
+            }
+        }
+        else
+        {
+            shootMage.StaffSystemOff();
+        }
         if (playing)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && tree.HasFreeSpawner(1))
-            {
-                Mangomage.SetTrigger("MakeMango");
-                shootMage.SpawnSpirit(1);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2) && tree.HasFreeSpawner(2))
-            {
-                Mangomage.SetTrigger("MakeMango");
-                shootMage.SpawnSpirit(2);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && tree.HasFreeSpawner(3))
-            {
-                Mangomage.SetTrigger("MakeMango");
-                shootMage.SpawnSpirit(3);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && tree.HasFreeSpawner(4))
-            {
-                Mangomage.SetTrigger("MakeMango");
-                shootMage.SpawnSpirit(4);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5) && tree.HasFreeSpawner(5))
-            {
-                Mangomage.SetTrigger("MakeMango");
-                shootMage.SpawnSpirit(5);
-            }
+            comboCounterText.text = comboCounter.ToString();
+            
+            
             if (Input.GetMouseButtonDown(0) && mangoToFire != null)
             {
                 ShootMango();
@@ -72,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        comboCounter = 1;
         ClearAllTransforms(veganHolder);
         ClearAllTransforms(mangoHolder);
         Tree.mangos.Clear();

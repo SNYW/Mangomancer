@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TreeEditor;
+using UnityEngine;
 
 public class MangoDamage : MonoBehaviour
 {
@@ -6,13 +7,23 @@ public class MangoDamage : MonoBehaviour
     public bool active;
     private ParticleSystem particleSystem;
     private MangoGrowth mangoGrowth;
+    private GameManager gameManager;
 
     private void Start()
     {
         mangoGrowth = GetComponent<MangoGrowth>();
         particleSystem = mangoGrowth.trail;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
+    private void Update()
+    {
+        if(active && transform.position.x > 28)
+        {
+            gameManager.comboCounter = 1;
+            Destroy(this.gameObject);
+        }
+    }
 
     public void Activate()
     {
@@ -29,6 +40,10 @@ public class MangoDamage : MonoBehaviour
                 var vegan = collision.gameObject.GetComponentInParent<Vegan>();
                 vegan.Die(mangoGrowth.currentGrownSize * 100);
                 Die();
+                if(gameManager.comboCounter < Tree.availSpawners)
+                {
+                    gameManager.comboCounter++;
+                }
             }
         }
     }
